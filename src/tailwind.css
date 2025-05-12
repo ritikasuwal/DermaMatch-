@@ -1,0 +1,8 @@
+@import "tailwindcss";
+
+.Product-Container {
+  @apply grid grid-cols-2 md:grid-cols-4 gap-3 bg-gray-100 mt-5;
+}
+.Products{
+    @apply bg-white shadow-md rounded-lg overflow-hidden hover:shadow-lg transition flex flex-col  
+}

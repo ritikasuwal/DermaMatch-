@@ -1,0 +1,108 @@
+:root {
+    --color-primary: #ff5252;   /* Indigo-600 */
+    --color-secondary: #; /* Amber-500 */
+   
+
+  }
+  
+  .primary-bg {
+    background-color: var(--color-primary);
+  }
+  
+  .secondary-text {
+    color: var(--color-secondary);
+  }
+  
+body{
+    font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  background-color: #f5f5f5;
+  color: rgba(0,0,0,0.7);
+
+}
+*{
+    margin: 0px;
+    padding: opx;
+    box-sizing: border-box;
+}
+.container{
+    width: 90%;
+    margin: auto;
+}
+header .top-strip {
+    border-top : 1px solid rgba(0, 0,0, 0.1);
+    border-bottom: 1px solid rgba(0,0,0,0.1) ;
+}
+.bg-org{
+    background: #ff5252;
+
+}
+.link:hover{
+  color: #ff5252;
+}
+.MuiBadge-badge{
+  background-color: #ff5252 !important;
+}
+nav button{
+  text-transform: capitalize !important;
+  color: rgba(0,0,0,0.7) !important;
+
+}
+nav button:hover{
+ 
+  color: #ff5252 !important;
+
+}
+nav ul button:hover {
+  background:none !important ;
+}
+
+.sliderHome{
+  overflow: inherit !important;
+}
+.swiper-button-prev, .swiper-button-next {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  border-radius: 50%;  
+  width: 45px;
+  height: 45px;
+  min-width: 45px;
+  box-shadow: 0 1px 3px #0000001f !important;
+  font-size: 22px !important;
+  color: #000;
+}
+
+
+.swiper-button-prev::after, .swiper-button-next::after {
+  font-size: 22px !important;  
+  color: #000 !important;       
+}
+
+.swiper-button-prev:hover, .swiper-button-next:hover {
+  background-color: #f0f0f0 !important;
+}
+.homeSlider{
+  overflow: inherit !important;
+}
+.homeSlider , .swiper-button-prev {
+  left: -10x !important;
+}
+.homeSlider ,.swiper-button-next{
+  right: 10px !important;
+}
+.product-price {
+  color: #f57224;
+}
+.BuyNow{
+  background-color:  #f57224;
+  color: white;
+}
+.AddToCart{
+  background-color:  #2abbe8;
+  color: white;
+}
+.HomeCatSlider{
+  background-color: #2abbe8;
+}
