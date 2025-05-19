@@ -5,52 +5,41 @@ const Cart = () => {
   const navigate = useNavigate();
   const [cartItems, setCartItems] = useState([]);
 
-  // Load cart items from localStorage
   useEffect(() => {
     const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
     setCartItems(storedCart);
   }, []);
 
-  // Update the cart in localStorage and state
   const updateCart = (updatedCart) => {
     localStorage.setItem("cart", JSON.stringify(updatedCart));
     setCartItems(updatedCart);
   };
 
-  // Handle increase/decrease quantity
   const changeQuantity = (id, operation) => {
-    const updatedCart = cartItems
-      .map((item) => {
+    const updatedCart = cartItems.map((item) => {
         if (item.id === id) {
           item.quantity =
             operation === "increase" ? item.quantity + 1 : item.quantity - 1;
         }
         return item;
-      })
-      .filter((item) => item.quantity > 0); // Remove items with zero quantity
-
-    updateCart(updatedCart);
+      }).filter((item) => item.quantity > 0);
+      updateCart(updatedCart);
   };
 
-  // Handle removing item
   const removeItem = (id) => {
     const updatedCart = cartItems.filter((item) => item.id !== id);
     updateCart(updatedCart);
   };
 
-  // Handle checkout
   const handleCheckout = () => {
     const user = JSON.parse(localStorage.getItem("currentUser"));
     if (!user) {
-      // If the user isn't logged in, redirect to login
       navigate("/login");
     } else {
-      // Proceed with checkout
       navigate("/checkout");
     }
   };
 
-  // Calculate total price
   const calculateTotal = () => {
     return cartItems.reduce(
       (total, item) => total + item.price * item.quantity,
@@ -59,58 +48,62 @@ const Cart = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 py-8">
-      <div className="container mx-auto bg-white p-6 rounded-lg shadow-md">
-        <h2 className="text-2xl font-bold text-gray-800 mb-4">Shopping Cart</h2>
+    <div className="min-h-screen bg-gray-100 py-8 px-4">
+      <div className="max-w-10/12 mx-auto bg-white p-6 rounded-lg shadow-lg w-5/5 ">
+        <h2 className="text-2xl font-bold text-gray-800 mb-6">Your Cart</h2>
 
         {cartItems.length === 0 ? (
           <div className="text-center text-gray-600">
-            <p>Your cart is empty.</p>
-            <Link to="/" className="text-blue-600 hover:underline">
-              Go back to shopping
+            <p className="mb-2">Your cart is currently empty.</p>
+            <Link
+              to="/"
+              className="text-blue-600 hover:underline font-medium"
+            >
+              Continue Shopping
             </Link>
           </div>
         ) : (
-          <div>
-            {/* Cart Items */}
-            <div className="space-y-4">
+          <>
+            <div className="space-y-6">
               {cartItems.map((item) => (
                 <div
                   key={item.id}
-                  className="flex items-center justify-between py-4 border-b"
+                  className="flex items-center justify-between border-b pb-4"
                 >
-                  <div className="flex items-center">
+                  <div className="flex items-center gap-4">
                     <img
                       src={item.image}
                       alt={item.name}
-                      className="w-16 h-16 object-cover rounded"
+                      className="w-20 h-20 object-contain rounded-md bg-gray-50 p-2"
                     />
-                    <div className="ml-4">
-                      <h3 className="text-lg font-semibold text-gray-800">
+                    <div>
+                      <h3 className="font-semibold text-gray-800">
                         {item.name}
                       </h3>
-                      <p className="text-gray-600">${item.price}</p>
+                      <p className="text-gray-600 text-sm">
+                        Rs.{item.price}
+                      </p>
                     </div>
                   </div>
 
-                  <div className="flex items-center space-x-4">
+                  <div className="flex items-center gap-4">
                     <button
                       onClick={() => changeQuantity(item.id, "decrease")}
-                      className="text-gray-600 hover:text-blue-600"
                       disabled={item.quantity <= 1}
+                      className="px-2 py-1 text-xl rounded bg-gray-200 hover:bg-gray-300"
                     >
                       -
                     </button>
-                    <span className="text-gray-800">{item.quantity}</span>
+                    <span className="w-6 text-center">{item.quantity}</span>
                     <button
                       onClick={() => changeQuantity(item.id, "increase")}
-                      className="text-gray-600 hover:text-blue-600"
+                      className="px-2 py-1 text-xl rounded bg-gray-200 hover:bg-gray-300"
                     >
                       +
                     </button>
                     <button
                       onClick={() => removeItem(item.id)}
-                      className="text-red-600 hover:text-red-800"
+                      className="text-red-500 hover:underline text-sm"
                     >
                       Remove
                     </button>
@@ -119,8 +112,8 @@ const Cart = () => {
               ))}
             </div>
 
-            {/* Cart Summary */}
-            <div className="mt-6 border-t pt-4 flex justify-between items-center">
+            {/* Total and Checkout */}
+            <div className="mt-8 flex justify-between items-center border-t pt-6">
               <h3 className="text-xl font-semibold text-gray-800">
                 Total: Rs.{calculateTotal()}
               </h3>
@@ -128,10 +121,10 @@ const Cart = () => {
                 onClick={handleCheckout}
                 className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition"
               >
-                Checkout
+                Proceed to Checkout
               </button>
             </div>
-          </div>
+          </>
         )}
       </div>
     </div>
