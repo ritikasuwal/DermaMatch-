@@ -3,6 +3,7 @@ import CryptoJS from "crypto-js";
 
 import { useLocation } from "react-router-dom";
 import { v4 as uuid4 } from "uuid";
+
 const EsewaPayment = () => {
   const location = useLocation();
   const { amount: prodAmt = "0", name = "n/a" } = location.state || {};
@@ -22,18 +23,13 @@ const EsewaPayment = () => {
   });
 
   // generate signature function
-  const generateSignature = (
-    total_amount,
-    transaction_uuid,
-    product_code,
-    secret
-  ) => {
-    const hashString = `total_amount=${total_amount},transaction_uuid=${transaction_uuid},
-    product_code=${product_code}`;
-    const hash = CryptoJS.HmacSHA256(hashString, secret);
-    const hashedSignature = CryptoJS.enc.Base64.stringify(hash);
-    return hashedSignature;
-  };
+ const generateSignature = (total_amount, transaction_uuid, product_code, secret) => {
+  const hashString = `total_amount=${total_amount},transaction_uuid=${transaction_uuid},product_code=${product_code}`;
+  const hash = CryptoJS.HmacSHA256(hashString, secret);
+  const hashedSignature = CryptoJS.enc.Base64.stringify(hash);
+  return hashedSignature;
+};
+
 
   // useeffect
   useEffect(() => {

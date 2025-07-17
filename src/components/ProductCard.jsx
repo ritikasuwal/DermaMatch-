@@ -2,6 +2,18 @@ import React, { useContext } from "react";
 import { CartContext } from "../Context/CartContext";
 import { useNavigate } from "react-router-dom";
 
+import dt from "../assets/detox.webp"
+import vc from "../assets/vitamin_c_serum_3.webp"
+import alo from "../assets/alo.jpg"
+import acne from "../assets/acne.jpg"
+import cetnight from "../assets/cetnight.jpg"
+import joygreentea from "../assets/joygreentea.jpg"
+import hy from "../assets/hy.jpg"
+import rfm from "../assets/rfm.jpg"
+import matespf30 from "../assets/matespf30.webp"
+import plum from "../assets/plum.webp"
+import dermacosun from "../assets/dermacosuns.webp"
+
 const ProductCard = ({ product }) => {
   const { addToCart } = useContext(CartContext);
 
